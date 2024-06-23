@@ -2,10 +2,12 @@ package com.hhpluslecture.lecture.service;
 
 import com.hhpluslecture.lecture.aggregate.domain.LectureApplication;
 import com.hhpluslecture.lecture.repository.LectureApplicationRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class LectureApplicationServiceImpl implements LectureApplicationService{
     //

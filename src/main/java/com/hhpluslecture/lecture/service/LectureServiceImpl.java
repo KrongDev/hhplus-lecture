@@ -5,6 +5,7 @@ import com.hhpluslecture.lecture.aggregate.domain.Lecture;
 import com.hhpluslecture.lecture.aggregate.event.LectureApplied;
 import com.hhpluslecture.lecture.repository.LectureApplicationRepository;
 import com.hhpluslecture.lecture.repository.LectureRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import static com.hhpluslecture.lecture.error.LectureErrorCode.*;
  * 특강들 조회
  */
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class LectureServiceImpl implements  LectureService {
     //
