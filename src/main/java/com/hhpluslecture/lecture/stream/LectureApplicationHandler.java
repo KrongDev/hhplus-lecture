@@ -1,7 +1,5 @@
 package com.hhpluslecture.lecture.stream;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hhpluslecture.lecture.aggregate.event.LectureApplied;
 import com.hhpluslecture.lecture.service.LectureApplicationService;
 import lombok.RequiredArgsConstructor;

@@ -2,7 +2,6 @@ package com.hhpluslecture.lecture.repository;
 
 import com.hhpluslecture.lecture.aggregate.domain.LectureApplication;
 import com.hhpluslecture.lecture.aggregate.entity.LectureApplicationEntity;
-import com.hhpluslecture.lecture.aggregate.entity.LectureEntity;
 import com.hhpluslecture.lecture.repository.orm.LectureApplicationJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
