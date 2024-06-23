@@ -1,0 +1,2 @@
+create table lecture (lecture_id varchar(255) not null, capacity integer not null, created_at bigint not null, description varchar(255), head_count integer not null, start_time bigint not null, title varchar(255), version integer not null, primary key (lecture_id))
+create table lecture_application (lecture_id varchar(255) not null, user_id varchar(255) not null, application_time bigint not null, primary key (lecture_id, user_id))
