@@ -15,7 +15,7 @@ import org.springframework.beans.BeanUtils;
 @Getter
 @Setter
 @Entity
-@Table(name="Lecture")
+@Table(name="lecture")
 @AllArgsConstructor
 @NoArgsConstructor
 public class LectureEntity {

@@ -23,7 +23,7 @@ public class LectureApplicationRepositoryImpl implements LectureApplicationRepos
     @Override
     public boolean hasLectureApplication(String lectureId, String userId) {
         // return this.lectureApplicationJpaRepository.existsById(new LectureApplicationEntity.ApplicationKey(lectureId, userId));
-        Optional<LectureApplicationEntity> lectureApplication =  this.lectureApplicationJpaRepository.findById(new LectureApplicationEntity.ApplicationKey(lectureId, userId));
+        Optional<LectureApplicationEntity> lectureApplication = this.lectureApplicationJpaRepository.findById(new LectureApplicationEntity.ApplicationKey(lectureId, userId));
         return lectureApplication.isPresent();
     }
 }

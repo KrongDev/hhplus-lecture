@@ -19,7 +19,6 @@ import static com.hhpluslecture.lecture.error.LectureErrorCode.*;
  * 특강들 조회
  */
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class LectureServiceImpl implements  LectureService {
     //
@@ -34,6 +33,7 @@ public class LectureServiceImpl implements  LectureService {
      * @param userId 유저 아이디
      */
     @Override
+    @Transactional
     public void lectureApply(String lectureId, String userId) {
         Lecture lecture = lectureRepository.findById(lectureId);
 

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HhplusLectureApplication {
 
     public static void main(String[] args) {
+        //
         SpringApplication.run(HhplusLectureApplication.class, args);
     }
 

@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class LectureApplicationServiceImpl implements LectureApplicationService{
     //
@@ -20,6 +19,7 @@ public class LectureApplicationServiceImpl implements LectureApplicationService{
      * @param userId 유저아이디
      */
     @Override
+    @Transactional
     public void create(String lectureId, String userId) {
         //
         LectureApplication lectureApplication = LectureApplication.newApplication(lectureId, userId);
