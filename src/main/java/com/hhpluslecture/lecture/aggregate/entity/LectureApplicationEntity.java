@@ -17,7 +17,7 @@ public class LectureApplicationEntity {
     private String userId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"lectureApplications"})
-    @JoinColumn(name = "lecture_id")
+    @JoinColumn(name = "lecture_id", referencedColumnName = "id", nullable = false)
     private LectureEntity lecture;
 
     public static LectureApplicationEntity of(String id, String userId) {
