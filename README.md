@@ -72,3 +72,12 @@ Table application {
 }
 
 ```
+
+### JPA 사용시 주의
+1. exists 사용 주의
+exists를 사용할경우 날아가는 sql을 확인해보면 아래와 같은 query문을 날리는 것을 확인할 수 있습니다.
+```sql
+Hibernate: select count(*) from lecture_application lae1_0 where (lae1_0.lecture_id,lae1_0.user_id)=(?,?)
+```
+존재하는지 안하는지를 찾는 것이 아닌 몇개가 있는지를 확인함으로써 이는 성능저하를 야기할 수 있습니다.   
+따라서 findById와 같이 해당 record를 찾은 후 존재여부는 로직으로 처리 하는 것을 추천합니다.
