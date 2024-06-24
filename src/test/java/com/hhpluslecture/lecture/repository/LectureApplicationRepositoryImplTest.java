@@ -13,6 +13,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
@@ -31,23 +35,23 @@ class LectureApplicationRepositoryImplTest {
         lectureApplicationJpaRepository.deleteAll();
     }
 
-    private long lectureId = 0;
+    private final long lectureId = 0;
     private String title = "testCode";
     private String userId = "test";
     private int capacity = 10;
-    private long start_at= System.currentTimeMillis();
+    private LocalDateTime start_at= LocalDateTime.of(2024, 6, 1, 12, 0);
 
     @Test
     @DisplayName("특강 신청 테스트 - 성공")
     @Description("lecture와 lectureApplication은 양방향 참조로 정상적으로 데이터가 저장되고 조회되는지 확인하는 테스트")
     void apply() {
         //Given
-        LectureEntity lectureEntity = LectureEntity.of(title, capacity, start_at);
+        LectureEntity lectureEntity = new LectureEntity(lectureId, title, capacity, new ArrayList<>(), start_at, LocalDateTime.now(ZoneId.of("Asia/Seoul")));
         lectureEntity = lectureJpaRepository.save(lectureEntity);
 
         //When
-        String lectureApplicationId = String.format("%s-%s", lectureId, userId);
-        LectureApplicationEntity lectureApplicationEntity = LectureApplicationEntity.of(lectureApplicationId, userId);
+        String lectureApplicationId = String.format("%s|%s", lectureId, userId);
+        LectureApplicationEntity lectureApplicationEntity = new LectureApplicationEntity(lectureApplicationId, userId, null);
         lectureEntity.addLectureApplication(lectureApplicationEntity);
         lectureApplicationJpaRepository.save(lectureApplicationEntity);
 

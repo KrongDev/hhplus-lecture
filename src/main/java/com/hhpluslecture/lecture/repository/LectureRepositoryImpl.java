@@ -1,5 +1,6 @@
 package com.hhpluslecture.lecture.repository;
 
+import com.hhpluslecture.lecture.aggregate.domain.Lecture;
 import com.hhpluslecture.lecture.aggregate.entity.LectureEntity;
 import com.hhpluslecture.lecture.repository.orm.LectureJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +16,9 @@ public class LectureRepositoryImpl implements LectureRepository {
     private final LectureJpaRepository lectureJpaRepository;
 
     @Override
-    public long create(String title, int capacity, long startAt) {
+    public long create(Lecture lecture) {
         //
-        LectureEntity lectureEntity = LectureEntity.of(title, capacity, startAt);
+        LectureEntity lectureEntity = LectureEntity.fromDomain(lecture);
         lectureJpaRepository.save(lectureEntity);
         return lectureEntity.getId();
     }

@@ -1,10 +1,15 @@
 package com.hhpluslecture.lecture.aggregate.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.hhpluslecture.lecture.aggregate.domain.Lecture;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +17,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "lecture")
+@AllArgsConstructor
+@NoArgsConstructor
 public class LectureEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +29,15 @@ public class LectureEntity {
     @JsonIgnoreProperties({"lecture"})
     private List<LectureApplicationEntity> lectureApplications = new ArrayList<>();
 
-    private long start_at;
-    private long create_at;
+    private LocalDateTime start_at;
+    private LocalDateTime create_at;
 
-    public static LectureEntity of(String title, int capacity, long startAt) {
+    public static LectureEntity fromDomain(Lecture lecture) {
         LectureEntity entity = new LectureEntity();
-        entity.setTitle(title);
-        entity.setCapacity(capacity);
-        entity.setStart_at(startAt);
-        entity.setCreate_at(System.currentTimeMillis());
+        entity.setTitle(lecture.getTitle());
+        entity.setCapacity(lecture.getCapacity());
+        entity.setStart_at(lecture.getStart_at());
+        entity.setCreate_at(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
 
         return entity;
     }
