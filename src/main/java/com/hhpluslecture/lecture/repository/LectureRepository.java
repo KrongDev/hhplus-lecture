@@ -1,9 +1,12 @@
 package com.hhpluslecture.lecture.repository;
 
 import com.hhpluslecture.lecture.aggregate.domain.Lecture;
-import com.hhpluslecture.lecture.aggregate.entity.LectureEntity;
+
+import java.util.List;
 
 public interface LectureRepository {
     long create(Lecture lecture);
-    LectureEntity findByIdForUpdate(long id);
+    Lecture findById(long id);
+    Lecture findByIdForUpdate(long id);
+    List<Lecture> findAll();
 }

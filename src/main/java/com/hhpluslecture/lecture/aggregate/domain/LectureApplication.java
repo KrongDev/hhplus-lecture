@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,13 +16,15 @@ public class LectureApplication {
     private String id;
     private String userId;
     private Lecture lecture;
+    private LocalDateTime createAt;
 
 
-    public static LectureApplication newApplication(String lectureId, String userId, Lecture lecture) {
+    public static LectureApplication newApplication(long lectureId, String userId, Lecture lecture) {
         return new LectureApplication(
                 String.format("%s|%s", lectureId, userId),
                 userId,
-                lecture
+                lecture,
+                LocalDateTime.now(ZoneId.of("Asia/Seoul"))
         );
     }
 }

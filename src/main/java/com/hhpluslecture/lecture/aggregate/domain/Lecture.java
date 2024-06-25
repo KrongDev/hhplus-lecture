@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Getter
@@ -18,21 +19,21 @@ public class Lecture {
     private String title;
     private int capacity;
     private List<LectureApplication> lectureApplications;
-    private LocalDateTime start_at;
-    private LocalDateTime create_at;
+    private LocalDateTime startAt;
+    private LocalDateTime createAt;
 
     public Lecture() {
         //
         this.lectureApplications = new ArrayList<>();
     }
 
-    public Lecture(String title, int capacity, LocalDateTime start_at) {
+    public Lecture(String title, int capacity, LocalDateTime startAt) {
         //
         this();
         this.title = title;
         this.capacity = capacity;
-        this.start_at = start_at;
-        this.create_at = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        this.startAt = startAt;
+        this.createAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 
     public int getHeadCount() {
@@ -40,7 +41,7 @@ public class Lecture {
         return this.lectureApplications.size();
     }
 
-    public boolean isAtCapacity() {
+    public boolean isCapacityExceeded() {
         //
         return getHeadCount() == this.capacity;
     }
@@ -48,6 +49,11 @@ public class Lecture {
     public boolean isEnrollmentStarted() {
         //
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-        return this.start_at.isBefore(now);
+        return this.startAt.isBefore(now);
+    }
+
+    public boolean isAlreadyApplied(String userId) {
+        if(Objects.isNull(this.lectureApplications) || this.lectureApplications.isEmpty()) return false;
+        return lectureApplications.stream().anyMatch(lectureApplication -> userId.equals(lectureApplication.getUserId()));
     }
 }

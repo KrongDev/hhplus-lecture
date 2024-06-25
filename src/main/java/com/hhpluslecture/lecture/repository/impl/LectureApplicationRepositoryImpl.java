@@ -1,8 +1,9 @@
-package com.hhpluslecture.lecture.repository;
+package com.hhpluslecture.lecture.repository.impl;
 
 import com.hhpluslecture.lecture.aggregate.domain.LectureApplication;
 import com.hhpluslecture.lecture.aggregate.entity.LectureApplicationEntity;
 import com.hhpluslecture.lecture.aggregate.entity.LectureEntity;
+import com.hhpluslecture.lecture.repository.LectureApplicationRepository;
 import com.hhpluslecture.lecture.repository.orm.LectureApplicationJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class LectureApplicationRepositoryImpl implements LectureApplicationRepository {
     //
-//    private final LectureJpaRepository lectureJpaRepository;
     private final LectureApplicationJpaRepository lectureApplicationJpaRepository;
 
     @Override

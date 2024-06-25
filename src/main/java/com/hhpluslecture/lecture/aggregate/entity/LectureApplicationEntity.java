@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -23,10 +26,28 @@ public class LectureApplicationEntity {
     @JoinColumn(name = "lecture_id", referencedColumnName = "id", nullable = false)
     private LectureEntity lecture;
 
+    private LocalDateTime createAt;
+
     public static LectureApplicationEntity from(LectureApplication lectureApplication) {
         LectureApplicationEntity lectureApplicationEntity = new LectureApplicationEntity();
         lectureApplicationEntity.setId(lectureApplication.getId());
         lectureApplicationEntity.setUserId(lectureApplication.getUserId());
         return lectureApplicationEntity;
+    }
+
+    public LectureApplication toDomain() {
+        LectureApplication lectureApplication = new LectureApplication();
+        lectureApplication.setId(this.id);
+        lectureApplication.setUserId(this.userId);
+        if(!Objects.isNull(this.lecture))
+            lectureApplication.setLecture(this.lecture.toDto());
+        return lectureApplication;
+    }
+
+    public LectureApplication toDto() {
+        LectureApplication lectureApplication = new LectureApplication();
+        lectureApplication.setId(this.id);
+        lectureApplication.setUserId(this.userId);
+        return lectureApplication;
     }
 }
