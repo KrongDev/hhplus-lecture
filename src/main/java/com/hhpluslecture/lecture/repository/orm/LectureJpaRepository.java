@@ -19,7 +19,6 @@ public interface LectureJpaRepository extends JpaRepository<LectureEntity, Long>
     @EntityGraph(value = "Lecture.lectureApplications")
     Optional<LectureEntity> findByIdForUpdate(long id);
 
-    @EntityGraph(value = "Lecture.lectureApplications")
     Optional<LectureEntity> findById(long id);
 
     @EntityGraph(value = "Lecture.lectureApplications")

@@ -9,5 +9,5 @@ public interface LectureService {
     long createLecture(String title, int capacity, LocalDateTime startAt);
     void applyLecture(long lectureId, String userId);
     Lecture loadLecture(long lectureId);
-    List<Lecture> loadLectures();
+    List<Lecture> loadLectures(String userId);
 }

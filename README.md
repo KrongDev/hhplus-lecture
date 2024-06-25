@@ -45,33 +45,18 @@
 3. 특강 신청 완료 여부 조회 - history
     - 유저가 해당 특강에 있어 신청 완료가 되지 않은경우 - 실패한 경우 실패 케이스
 
-### 기능 시나리오
+### ERD
+![ERD.png](image/ERD.png)
 
-### 추가 확장 기능
-- 특강 등록
-- 특강 마감일 지정
-- 특강 참여 인원 수 조정
-- 특강 신청 취소 기능
+**Lecture**: 특강 테이블   
+- title: 특강 이름   
+- capacity: 
 
-```mysql
-Table lecture {
-  id long pk
-  version int
-  title varchar2
-  description varchar2
-  head_count int
-  open_time datetime
-  created_at datetime 
-}
 
-Table application {
-  lectures_id long pk
-  user_id long pk
-  version int
-  application_time datetime
-}
+### Architecture
+![Layered Architecture.jpg](image/Layered Architecture.jpg)
 
-```
+---
 
 ### JPA 사용시 주의
 1. exists 사용 주의

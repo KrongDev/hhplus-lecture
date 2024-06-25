@@ -8,6 +8,9 @@ import com.hhpluslecture.lecture.repository.orm.LectureApplicationJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class LectureApplicationRepositoryImpl implements LectureApplicationRepository {
@@ -21,5 +24,12 @@ public class LectureApplicationRepositoryImpl implements LectureApplicationRepos
         lectureEntity.addLectureApplication(lectureApplicationEntity);
         lectureApplicationJpaRepository.save(lectureApplicationEntity);
         return lectureApplicationEntity.getId();
+    }
+    @Override
+    public LectureApplication findById(String lectureApplicationId) {
+        Optional<LectureApplicationEntity> res = lectureApplicationJpaRepository.findById(lectureApplicationId);
+        if (res.isEmpty())
+            throw new NoSuchElementException("no such lecture application by id: " + lectureApplicationId);
+        return res.get().toDomain();
     }
 }

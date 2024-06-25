@@ -65,7 +65,7 @@ class LectureServiceImplTest {
     @DisplayName("정상적으로 리스트 조회되는지 검증 - query문 한개만 발행하도록")
     void loadLectures() {
         //When
-        List<Lecture> lectures = lectureService.loadLectures();
+        List<Lecture> lectures = lectureService.loadLectures("");
         //Then
         assertNotNull(lectures);
         assertNotEquals(0, lectures.size());

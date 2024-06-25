@@ -18,13 +18,17 @@ public class LectureApplication {
     private Lecture lecture;
     private LocalDateTime createAt;
 
-
     public static LectureApplication newApplication(long lectureId, String userId, Lecture lecture) {
         return new LectureApplication(
-                String.format("%s|%s", lectureId, userId),
+                genId(lectureId, userId),
                 userId,
                 lecture,
                 LocalDateTime.now(ZoneId.of("Asia/Seoul"))
         );
+    }
+
+    public static String genId(long lectureId, String userId) {
+        //
+        return String.format("%s|%s", lectureId, userId);
     }
 }

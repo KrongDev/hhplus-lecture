@@ -6,10 +6,11 @@ import com.hhpluslecture.lecture.repository.LectureRepository;
 import com.hhpluslecture.lecture.service.LectureService;
 import com.hhpluslecture.lecture.service.error.CapacityExceededException;
 import com.hhpluslecture.lecture.service.error.RegistrationNotOpenException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,15 +47,25 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Lecture loadLecture(long lectureId) {
         //
         return this.lectureRepository.findById(lectureId);
     }
 
+    /**
+     * 이미 신청한 특강은 목록에 보여주지 않습니다.
+     * @param userId 유저아이디
+     * @return 특강 목록
+     */
     @Override
-    @Transactional
-    public List<Lecture> loadLectures() {
+    @Transactional(readOnly = true)
+    public List<Lecture> loadLectures(String userId) {
         //
-        return this.lectureRepository.findAll();
+        List<Lecture> lectures = this.lectureRepository.findAll();
+        if(Strings.isNotEmpty(userId) || Strings.isNotBlank(userId)) {
+            return lectures.stream().filter(lecture->!lecture.isAlreadyApplied(userId)).toList();
+        }
+        return lectures;
     }
 }
