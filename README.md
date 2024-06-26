@@ -49,12 +49,23 @@
 ![ERD.png](image/ERD.png)
 
 **Lecture**: 특강 테이블   
+역할:특강을 관리하는 테이블로써 특강 정보를 담당합니다.
 - title: 특강 이름   
-- capacity: 
+- capacity: 인원수 제한
+- startAt: 특강 신청 시작일
+- createAt: 생성일
+
+**Lecture_application**: 특강 신청자 목록   
+역할:특강을 신청한 학생목록을 관리하며,   
+목록이란 역할을 수행함으로써 신청 성공한 사람들의 History를 관리하는 역할을 수행할 수 있습니다.
+- id: lectureId | userId
+- lectureId: 특강 아이디
+- userId: 유저 아이디
+- createAt: 생성일
 
 
 ### Architecture
-![Layered Architecture.jpg](image/Layered Architecture.jpg)
+![Layered_architecture.jpg](image/Layered_architecture.jpg)
 
 ---
 
