@@ -29,6 +29,14 @@ public class LectureRepositoryImpl implements LectureRepository {
     }
 
     @Override
+    public LectureEntity findByIdForUpdate(long id) {
+        Optional<LectureEntity> res =  lectureJpaRepository.findByIdForUpdate(id);
+        if(res.isEmpty())
+            throw new NoSuchElementException("Lecture with id " + id + " not found");
+        return res.get();
+    }
+
+    @Override
     public LectureEntity findById(long id) {
         Optional<LectureEntity> res =  lectureJpaRepository.findById(id);
         if(res.isEmpty())

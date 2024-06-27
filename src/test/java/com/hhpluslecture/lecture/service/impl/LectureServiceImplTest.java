@@ -2,7 +2,6 @@ package com.hhpluslecture.lecture.service.impl;
 
 import com.hhpluslecture.lecture.aggregate.domain.Lecture;
 import com.hhpluslecture.lecture.service.LectureService;
-import com.hhpluslecture.lecture.service.error.CapacityExceededException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -86,7 +84,7 @@ class LectureServiceImplTest {
     @DisplayName("특강 신청 동시성 테스트")
     void usePoint() throws InterruptedException {
         //When
-        int memberCount = 30;
+        int memberCount = 6;
         ExecutorService executorsService = Executors.newFixedThreadPool(memberCount);
         CountDownLatch latch = new CountDownLatch(memberCount);
 

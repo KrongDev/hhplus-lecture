@@ -12,7 +12,6 @@ public class LectureMapper {
         Lecture lecture = new Lecture();
         lecture.setId(lectureEntity.getId());
         lecture.setTitle(lectureEntity.getTitle());
-        lecture.setVersion(lectureEntity.getVersion());
         lecture.setHeadCount(lectureEntity.getHeadCount());
         lecture.setCapacity(lectureEntity.getCapacity());
         lecture.setStartAt(lectureEntity.getStartAt());
@@ -25,7 +24,6 @@ public class LectureMapper {
         LectureEntity entity = new LectureEntity();
             entity.setId(lecture.getId());
             entity.setTitle(lecture.getTitle());
-            entity.setVersion(lecture.getVersion());
             entity.setHeadCount(lecture.getHeadCount());
             entity.setCapacity(lecture.getCapacity());
             entity.setStartAt(lecture.getStartAt());
