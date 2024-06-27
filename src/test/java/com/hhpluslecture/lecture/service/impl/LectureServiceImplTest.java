@@ -2,6 +2,7 @@ package com.hhpluslecture.lecture.service.impl;
 
 import com.hhpluslecture.lecture.aggregate.domain.Lecture;
 import com.hhpluslecture.lecture.service.LectureService;
+import com.hhpluslecture.lecture.service.error.CapacityExceededException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +11,14 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -23,7 +31,7 @@ class LectureServiceImplTest {
     private LectureService lectureService;
 
     private final String title = "test";
-    private final int capacity = 30;
+    private final int capacity = 5;
     private final LocalDateTime startAt = LocalDateTime.of(2024, 6, 1, 12, 0);
     private long lectureId = 1;
 
@@ -71,6 +79,35 @@ class LectureServiceImplTest {
         assertNotEquals(0, lectures.size());
         Lecture lecture = lectures.stream().filter(l -> l.getId() == lectureId).findFirst().orElse(null);
         assertNotNull(lecture);
-        assertNotEquals(0, lecture.getLectureApplications().size());
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("특강 신청 동시성 테스트")
+    void usePoint() throws InterruptedException {
+        //When
+        int memberCount = 30;
+        ExecutorService executorsService = Executors.newFixedThreadPool(memberCount);
+        CountDownLatch latch = new CountDownLatch(memberCount);
+
+        AtomicInteger successCount = new AtomicInteger();
+        sleep(1000);
+
+        for (int i = 0; i < memberCount; i++) {
+            executorsService.submit(() -> {
+                try {
+                    lectureService.applyLecture(lectureId, UUID.randomUUID().toString());
+                    successCount.incrementAndGet();
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+        latch.await();
+
+        //Then
+        assertAll(
+                () -> assertEquals(successCount.get(), 4)
+        );
     }
 }

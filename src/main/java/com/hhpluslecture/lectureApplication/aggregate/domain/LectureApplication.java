@@ -1,4 +1,4 @@
-package com.hhpluslecture.lecture.aggregate.domain;
+package com.hhpluslecture.lectureApplication.aggregate.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,14 +15,14 @@ import java.time.ZoneId;
 public class LectureApplication {
     private String id;
     private String userId;
-    private Lecture lecture;
+    private long lectureId;
     private LocalDateTime createAt;
 
-    public static LectureApplication newApplication(long lectureId, String userId, Lecture lecture) {
+    public static LectureApplication newApplication(long lectureId, String userId) {
         return new LectureApplication(
                 genId(lectureId, userId),
                 userId,
-                lecture,
+                lectureId,
                 LocalDateTime.now(ZoneId.of("Asia/Seoul"))
         );
     }

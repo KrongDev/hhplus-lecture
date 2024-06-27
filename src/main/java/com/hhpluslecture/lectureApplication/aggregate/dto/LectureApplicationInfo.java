@@ -1,6 +1,6 @@
-package com.hhpluslecture.lecture.aggregate.dto;
+package com.hhpluslecture.lectureApplication.aggregate.dto;
 
-import com.hhpluslecture.lecture.aggregate.domain.LectureApplication;
+import com.hhpluslecture.lectureApplication.aggregate.domain.LectureApplication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -13,14 +13,12 @@ import java.time.LocalDateTime;
 public class LectureApplicationInfo {
     private String userId;
     private long lectureId;
-    private String lectureTitle;
     private LocalDateTime createAt;
 
     public static LectureApplicationInfo from(LectureApplication lectureApplication) {
         return LectureApplicationInfo.builder()
                 .userId(lectureApplication.getUserId())
-                .lectureId(lectureApplication.getLecture().getId())
-                .lectureTitle(lectureApplication.getLecture().getTitle())
+                .lectureId(lectureApplication.getLectureId())
                 .createAt(lectureApplication.getCreateAt())
                 .build();
     }

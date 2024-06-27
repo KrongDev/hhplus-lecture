@@ -39,4 +39,10 @@ public class LectureController {
         //
         return ResponseEntity.ok(LectureInfo.fromDomains(lectureService.loadLectures(userId)));
     }
+
+    @GetMapping("/application/{userId}")
+    public ResponseEntity<Boolean> isApplyComplete(@PathVariable String userId, @RequestParam long lectureId) {
+        //
+        return ResponseEntity.ok(lectureService.isApplyComplete(lectureId, userId));
+    }
 }
