@@ -19,7 +19,6 @@ import java.util.Objects;
 public class Lecture {
     private long id;
     private String title;
-    private int version;
     private int headCount;
     private int capacity;
     private LocalDateTime startAt;

@@ -43,7 +43,6 @@ public class LectureApplyFailTest {
                  lectureId,
                  "testTitle",
                  0,
-                 0,
                  1,
                  LocalDateTime.of(2024, 6, 1, 12, 0),
                  now
@@ -55,7 +54,7 @@ public class LectureApplyFailTest {
     public void applyLectureNotStarted() {
         //Given
         lectureEntity.setStartAt(LocalDateTime.of(2030, 6, 1, 12, 0));
-        when(lectureRepository.findById(lectureId)).thenReturn(lectureEntity);
+        when(lectureRepository.findByIdForUpdate(lectureId)).thenReturn(lectureEntity);
         //When-Then
         assertThrows(RegistrationNotOpenException.class, () -> lectureServiceimpl.applyLecture(lectureId, userId));
     }
@@ -65,7 +64,7 @@ public class LectureApplyFailTest {
     public void applyCapacityExceeded() {
         //Given
         lectureEntity.setCapacity(0);
-        when(lectureRepository.findById(lectureId)).thenReturn(lectureEntity);
+        when(lectureRepository.findByIdForUpdate(lectureId)).thenReturn(lectureEntity);
         //When-Then
         assertThrows(CapacityExceededException.class, () -> lectureServiceimpl.applyLecture(lectureId, userId));
     }
@@ -74,7 +73,7 @@ public class LectureApplyFailTest {
     @DisplayName("특강신청 - 강의를 이미 신청한경우")
     public void applyAlreadyApplied() {
         //Given
-        when(lectureRepository.findById(lectureId)).thenReturn(lectureEntity);
+        when(lectureRepository.findByIdForUpdate(lectureId)).thenReturn(lectureEntity);
         when(lectureApplicationRepository.findById(String.format("%d|%s", lectureId, userId))).thenReturn(new LectureApplicationEntity("", userId, lectureId, LocalDateTime.now()));
         //When-Then
         assertThrows(IllegalArgumentException.class, () -> lectureServiceimpl.applyLecture(lectureId, userId));

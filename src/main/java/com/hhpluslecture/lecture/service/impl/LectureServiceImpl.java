@@ -41,7 +41,7 @@ public class LectureServiceImpl implements LectureService {
     @Override
     @Transactional
     public void applyLecture(long lectureId, String userId) {
-        Lecture lecture = LectureMapper.convertToDomain(lectureRepository.findById(lectureId));
+        Lecture lecture = LectureMapper.convertToDomain(lectureRepository.findByIdForUpdate(lectureId));
         if(lecture == null)
             throw new NoSuchElementException("해당 강의가 존재하지 않습니다.");
         if(!lecture.isEnrollmentStarted())
