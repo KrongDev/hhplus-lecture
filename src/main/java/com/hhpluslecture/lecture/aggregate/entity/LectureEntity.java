@@ -19,7 +19,6 @@ public class LectureEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    private int headCount;
     private int capacity;
 
     private LocalDateTime startAt;

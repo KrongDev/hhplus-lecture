@@ -30,4 +30,9 @@ public class LectureApplicationRepositoryImpl implements LectureApplicationRepos
     public List<LectureApplicationEntity> findByUserId(String userId) {
         return  lectureApplicationJpaRepository.findAllByUserId(userId);
     }
+
+    @Override
+    public int countByLectureId(long lectureId) {
+        return lectureApplicationJpaRepository.countAllBy(lectureId);
+    }
 }

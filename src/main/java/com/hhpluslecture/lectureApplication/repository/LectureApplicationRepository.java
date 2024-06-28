@@ -8,4 +8,5 @@ public interface LectureApplicationRepository {
     String create(LectureApplicationEntity lectureApplicationEntity);
     LectureApplicationEntity findById(String lectureApplicationId);
     List<LectureApplicationEntity> findByUserId(String userId);
+    int countByLectureId(long lectureId);
 }
