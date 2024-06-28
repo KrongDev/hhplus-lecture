@@ -46,12 +46,14 @@ public class LectureServiceImpl implements LectureService {
             throw new NoSuchElementException("해당 강의가 존재하지 않습니다.");
         if(!lecture.isEnrollmentStarted())
             throw new RegistrationNotOpenException("강의 신청 가능 시간이 아닙니다.");
-        int headCount = lectureApplicationRepository.countByLectureId(lectureId);
-        if(lecture.getCapacity() <= headCount)
+        if(lecture.isCapacityExceeded())
             throw new CapacityExceededException("수용가능한 인원을 초과하였습니다.");
         LectureApplication lectureApplication = loadLectureApplication(lectureId, userId);
         if(!Objects.isNull(lectureApplication))
             throw new IllegalArgumentException("이미 신청한 강의입니다.");
+        lecture.apply();
+        lectureRepository.update(LectureMapper.convertToEntity(lecture));
+        log.info("Applying lecture capacity {}, headCount {}", lecture.getCapacity(), lecture.getHeadCount());
         lectureApplicationCreate(lectureId, userId);
     }
 

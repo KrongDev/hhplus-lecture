@@ -19,6 +19,7 @@ import java.util.Objects;
 public class Lecture {
     private long id;
     private String title;
+    private int headCount;
     private int capacity;
     private LocalDateTime startAt;
     private LocalDateTime createAt;
@@ -29,6 +30,15 @@ public class Lecture {
         this.capacity = capacity;
         this.startAt = startAt;
         this.createAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+    }
+
+    public void apply() {
+        this.headCount++;
+    }
+
+    public boolean isCapacityExceeded() {
+        //
+        return getHeadCount() == this.capacity;
     }
 
     public boolean isEnrollmentStarted() {

@@ -13,6 +13,9 @@ import java.util.Optional;
 
 public interface LectureJpaRepository extends JpaRepository<LectureEntity, Long> {
     //
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select l from LectureEntity l where l.id = :id")
+    Optional<LectureEntity> findByIdForUpdate(long id);
     Optional<LectureEntity> findById(long id);
     List<LectureEntity> findAllByOrderByStartAtAsc();
 }

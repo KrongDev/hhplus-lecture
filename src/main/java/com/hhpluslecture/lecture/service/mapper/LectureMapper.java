@@ -12,6 +12,7 @@ public class LectureMapper {
         Lecture lecture = new Lecture();
         lecture.setId(lectureEntity.getId());
         lecture.setTitle(lectureEntity.getTitle());
+        lecture.setHeadCount(lectureEntity.getHeadCount());
         lecture.setCapacity(lectureEntity.getCapacity());
         lecture.setStartAt(lectureEntity.getStartAt());
         lecture.setCreateAt(lectureEntity.getCreateAt());
@@ -21,11 +22,12 @@ public class LectureMapper {
     public static LectureEntity convertToEntity(Lecture lecture) {
         if(Objects.isNull(lecture)) return null;
         LectureEntity entity = new LectureEntity();
-            entity.setId(lecture.getId());
-            entity.setTitle(lecture.getTitle());
-            entity.setCapacity(lecture.getCapacity());
-            entity.setStartAt(lecture.getStartAt());
-            entity.setCreateAt(lecture.getCreateAt());
+        entity.setId(lecture.getId());
+        entity.setTitle(lecture.getTitle());
+        entity.setHeadCount(lecture.getHeadCount());
+        entity.setCapacity(lecture.getCapacity());
+        entity.setStartAt(lecture.getStartAt());
+        entity.setCreateAt(lecture.getCreateAt());
         return entity;
     }
 }
